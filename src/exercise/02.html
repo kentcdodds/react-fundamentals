@@ -6,11 +6,15 @@
 
   <!-- 🐨 add React and ReactDOM on the page.
        💰 Here are script tags that'll do the job:
-  <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
   -->
+  <!-- NOTE: Basically, React is used to create elements -->
+  <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
+  <!-- NOTE: Basically, ReactDOM is used to put those elements in the DOM.
+  It is related to the platform, which in this case is the web, but there is also a
+  ReactNative and ReactVR packages as well -->
+  <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
 
-  <script type="module">
+  <!-- <script type="module">
     const rootElement = document.getElementById('root')
 
     // You're going to re-implement this code using React!
@@ -25,5 +29,37 @@
     // 🐨 Please re-implement the regular document.createElement code above
     // with these React API calls
     // 💰 The example in the markdown file should be a good hint for you.
+  </script> -->
+
+  <script>
+    const rootElement = document.getElementById('root');
+
+    const firstSpan = React.createElement('span', null, 'Hello');
+    const secondSpan = React.createElement('span', { children: 'World!' });
+
+    const elementProps = {
+      // children: 'Hello World!', <-- First approach
+      // children: ['Hello', ' ', 'World!'], <-- Second approach. Leads to a "missing keys" error
+      children: [firstSpan, ' ', secondSpan], // <-- Extra credit approach
+      className: 'container'
+    };
+    const elementType = 'div';
+
+    const reactElement = React.createElement(elementType, elementProps);
+  
+    // Children can also be specified as the third argument of React.createElement, and
+    // they can be astring or an array of elements. In fact, every argument after the second one
+    // will be set into an array that will be the children of the element.
+  
+    // This could have been a third approach:
+    // const reactElement = React.createElement(elementType, elementProps, 'Hello World!');
+  
+    // This could have been a fourth approach:
+    // const reactElement = React.createElement(elementType, elementProps, 'Hello', ' ', 'World!');
+    // This approach does not lead to a "missing keys" error.
+
+    const root = ReactDOM.createRoot(rootElement);
+
+    root.render(reactElement);
   </script>
 </body>

@@ -5,21 +5,68 @@
   <div id="root"></div>
   <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
 
   <!-- 🐨 add Babel to the page.
        💰 Here is the script tag that'll do the job:
-  <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+      <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
   -->
 
-  <script type="module">
+  <script type="text/babel">
     // 🐨 on the script tag above, change `type="module"`
     // to `type="text/babel"` so babel will compile this code for the browser to run.
 
     // 🐨 re-implement this using JSX!
-    const element = React.createElement('div', {
-      className: 'container',
-      children: 'Hello World',
-    })
+    // const element = React.createElement('div', {
+    //   className: 'container',
+    //   children: 'Hello World',
+    // })
+
+    const containerClass = 'container'
+    const containerMessage = 'Hello World'
+
+    const containerProps = {
+      className: containerClass,
+      children: containerMessage
+    };
+
+    // - Base Solution -
+    // const element = <div className="container">Hello World</div>
+    // Babel is the compiler that turns JSX into JavaScript using the React API.
+
+    // - Extra Credit 01 -
+    // const element = <div className={containerClass}>{containerMessage}</div>
+    /**
+     * Here we are using an interpolation with the curly braces. This means
+     * "inserting something of a different nature into something else."
+     * https://react.dev/learn/javascript-in-jsx-with-curly-braces
+     * 
+     * Statements (imperative logic) can't be used inside the curly braces,
+     * only experessions can be used (wich evaluates to a value).
+     * https://kentcdodds.com/blog/what-is-jsx
+    */
+
+    // - Extra Credit 02 -
+    const element = <div {...containerProps} id='some-id' />
+    // This is possible due to Babel's extend() functionality.
+    // Take into accoount that order matters when using the spread operator.
+
+    /**
+     * - JSX is a syntax extension for JavaScript that lets you write HTML-like markup
+     * inside a JavaScript file. Although there are other ways to write components,
+     * most React developers prefer the conciseness of JSX, and most codebases use it.
+     * 
+     * - You can’t return two objects from a function without wrapping them into an array.
+     * This explains why you also can’t return two JSX tags without wrapping them into
+     * another tag or a Fragment.
+     * 
+     * - JSX turns into JavaScript and attributes written in JSX become keys of JavaScript objects.
+     * 
+     * https://react.dev/learn/writing-markup-with-jsx
+    */
+
+    // In the end, with React and JSX you can use the full power of JavaScript inside your markup
+    // and HTML inside your JavaScript. This is what makes React so powerful and flexible.
 
     // 💰 there are a few subtle differences between JSX and HTML. One such
     // difference is how you apply a class to an element in JSX is by using

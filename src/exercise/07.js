@@ -29,8 +29,20 @@ function App() {
       </button>
       <ul>
         {items.map(item => (
+          // React's key prop gives you the ability to control component instances.
+          //https://kentcdodds.com/blog/understanding-reacts-key-prop
+          /** 
+           * When the JSX changes, React compares the newly generated React elements with the previous ones.
+           * In between these "snapshots", any sort of changes could have happened from state A to state B.
+           * React uses the keys identify wich elements changed and how they changed.
+           * If a key is not provided, React will use the index of the array items as the keys.
+           * This causes troubles, because diferent elements could share the same index across different states.
+           * Thats why not providing a key, or setting it to the index of the array's items
+           * could cause unpredictable behavior and performance issues.
+           * See https://epicreact.dev/why-react-needs-a-key-prop for more.
+           */
           // 🐨 add a key prop to the <li> below. Set it to item.id
-          <li>
+          <li key={item.id}>
             <button onClick={() => removeItem(item)}>remove</button>{' '}
             <label htmlFor={`${item.id}-input`}>{item.value}</label>{' '}
             <input id={`${item.id}-input`} defaultValue={item.value} />

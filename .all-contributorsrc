@@ -610,8 +610,18 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "Creeland",
+      "name": "Creeland A. Provinsal ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/518406?v=4",
+      "profile": "https://github.com/Creeland",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "skipCi": true,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }
